@@ -116,9 +116,9 @@ int main()
   hoppetSetPoleMassVFN(mc,mb,mt);
   hoppetSetExactDGLAP(exact_nfthreshold,exact_splitting);
   hoppetStartExtended(ymax,dy,minQval,maxQval,dlnlnQ,nloop,order,factscheme_MSbar);
-  hoppetStartStrFctExtended(order_max, nflav, xmuR,xmuF,sc_choice,zmass,param_coefs,wmass,zmass);
+  hoppetStartStrFctExtended(order_max, nflav,sc_choice,zmass,param_coefs,wmass,zmass);
   hoppetEvolve(asQ, Q0, nloop, muR_Q, lha_unpolarized_dummy_pdf, Q0);
-  hoppetInitStrFct(order_max,param_coefs);
+  hoppetInitStrFct(order_max,param_coefs, xmuR,xmuF);
 
   // APFEL++
   apfel::Banner();
@@ -192,7 +192,7 @@ int main()
     }
 
   // Create latex table
-  FILE* pFile = fopen(("../paper/table_N" + std::to_string(order_max - 1) + "LO.tex").c_str(), "w");
+  FILE* pFile = fopen(("results/table_N" + std::to_string(order_max - 1) + "LO.tex").c_str(), "w");
   for (double Q : std::vector<double>{2, 50, 100})
     {
       const double PZ  = pow(Q, 2) / ( pow(Q, 2) + pow(zmass, 2) ) / ( 4 * s2tw * ( 1 - s2tw ) );

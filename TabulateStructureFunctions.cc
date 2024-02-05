@@ -117,9 +117,9 @@ int main()
   hoppetSetPoleMassVFN(mc,mb,mt);
   hoppetSetExactDGLAP(exact_nfthreshold,exact_splitting);
   hoppetStartExtended(ymax,dy,minQval,maxQval,dlnlnQ,nloop,order,factscheme_MSbar);
-  hoppetStartStrFctExtended(order_max, nflav, xmuR,xmuF,sc_choice,zmass,param_coefs,wmass,zmass);
+  hoppetStartStrFctExtended(order_max, nflav,sc_choice,zmass,param_coefs,wmass,zmass);
   hoppetEvolve(asQ, Q0, nloop, muR_Q, lha_unpolarized_dummy_pdf, Q0);
-  hoppetInitStrFct(order_max,param_coefs);
+  hoppetInitStrFct(order_max,param_coefs,xmuR,xmuF);
 
   // APFEL++
   apfel::AlphaQCD a{asQ, Q0, Thresholds, nloop - 1};

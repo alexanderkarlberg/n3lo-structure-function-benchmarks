@@ -126,8 +126,8 @@ int main()
 	  std::cout << "#xmuR = " << xmuR << ", xmuF = " << xmuF << std::endl;
 
 	  // Structure functions
-	  hoppetStartStrFctExtended(order_max, nflav, xmuR, xmuF, sc_choice, zmass, param_coefs, wmass, zmass);
-	  hoppetInitStrFct(order_max, param_coefs);
+	  hoppetStartStrFctExtended(order_max, nflav, sc_choice, zmass, param_coefs, wmass, zmass);
+	  hoppetInitStrFct(order_max, param_coefs, xmuR, xmuF);
 	  const auto F2 = BuildStructureFunctions(F2Obj, PDFs, order_max - 1, as, fBq, xmuR, xmuF);
 
 	  std::vector<double> hop;
