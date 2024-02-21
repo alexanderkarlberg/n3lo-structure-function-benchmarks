@@ -71,7 +71,7 @@ int main()
   const double Ae     = - 0.5;
   const bool param_coefs = true;
 
-  const double Qmax    = 13000.0;
+  const double Qmax    = 2.0*13000.0;
   const double Qmin    = 1.0;
   const int order      = -6; 
   const double ymax    = 16.0;
@@ -83,88 +83,82 @@ int main()
 
   const std::vector<int> order_maxv{1, 2, 3, 4};
 
-  for (int k = 0; k < (int) order_maxv.size(); k++)
-    {
-      const int order_max = order_maxv[k];
-      const int nloop     = std::min(order_max, 3);
-      std::cout << "# Perturbative order = " << order_max << std::endl;
+  for (int k = 0; k < (int) order_maxv.size(); k++){
+    const int order_max = order_maxv[k];
+    const int nloop     = std::min(order_max, 3);
+    std::cout << "# Perturbative order = " << order_max << std::endl;
 
-      // HOPPET
-      hoppetSetPoleMassVFN(mc, mb, mt);
-      hoppetSetExactDGLAP(exact_nfthreshold, exact_splitting);
-      hoppetStartExtended(ymax, dy, Qmin, Qmax, dlnlnQ, nloop, order, factscheme_MSbar);
-      hoppetEvolve(asQ, Q0, nloop, muR_Q, lha_unpolarized_dummy_pdf, Q0);
+    // HOPPET
+    hoppetSetPoleMassVFN(mc, mb, mt);
+    hoppetSetExactDGLAP(exact_nfthreshold, exact_splitting);
+    hoppetStartExtended(ymax, dy, Qmin, Qmax, dlnlnQ, nloop, order, factscheme_MSbar);
+    hoppetEvolve(asQ, Q0, nloop, muR_Q, lha_unpolarized_dummy_pdf, Q0);
 
-      // APFEL++
-      apfel::AlphaQCD a{asQ, Q0, Thresholds, nloop - 1};
-      const apfel::TabulateObject<double> Alphas{a, 1000, 0.9, 1001, 3};
-      const auto as = [&] (double const& mu) -> double{ return Alphas.Evaluate(mu); };
-      const apfel::Grid g{{apfel::SubGrid{200, 1e-6, 3}, apfel::SubGrid{250, 1e-2, 3}, apfel::SubGrid{200, 6e-1, 3}, apfel::SubGrid{100, 8.5e-1, 3}}};
-      const auto EvolvedPDFs = BuildDglap(InitializeDglapObjectsQCD(g, Thresholds), apfel::LHToyPDFs, Q0, nloop - 1, as);
-      const apfel::TabulateObject<apfel::Set<apfel::Distribution>> TabulatedPDFs{*EvolvedPDFs, 500, 1, 1000, 3};
-      const auto PDFs = [&] (double const& x, double const& Q) -> std::map<int, double> { return TabulatedPDFs.EvaluateMapxQ(x, Q); };
-      const std::function<std::vector<double>(double const&)> fBq = [=] (double const& Q) -> std::vector<double> { return EWCharges(Q); };
-      const auto F2Obj = InitializeF2NCObjectsZM(g, Thresholds);
+    // APFEL++
+    apfel::AlphaQCD a{asQ, Q0, Thresholds, nloop - 1};
+    const apfel::TabulateObject<double> Alphas{a, 1000, 0.9, 1001, 3};
+    const auto as = [&] (double const& mu) -> double{ return Alphas.Evaluate(mu); };
+    const apfel::Grid g{{apfel::SubGrid{200, 1e-6, 3}, apfel::SubGrid{250, 1e-2, 3}, apfel::SubGrid{200, 6e-1, 3}, apfel::SubGrid{100, 8.5e-1, 3}}};
+    const auto EvolvedPDFs = BuildDglap(InitializeDglapObjectsQCD(g, Thresholds), apfel::LHToyPDFs, Q0, nloop - 1, as);
+    const apfel::TabulateObject<apfel::Set<apfel::Distribution>> TabulatedPDFs{*EvolvedPDFs, 500, 1, 1000, 3};
+    const auto PDFs = [&] (double const& x, double const& Q) -> std::map<int, double> { return TabulatedPDFs.EvaluateMapxQ(x, Q); };
+    const std::function<std::vector<double>(double const&)> fBq = [=] (double const& Q) -> std::vector<double> { return EWCharges(Q); };
+    const auto F2Obj = InitializeF2NCObjectsZM(g, Thresholds);
   
-      // Scales
-      const std::vector<std::vector<double>> xmuv{{1, 1}, {0.5, 1}, {2, 1}, {1, 0.5}, {1, 2}};
+    // Scales
+    const std::vector<std::vector<double>> xmuv{{1, 1}, {0.5, 1}, {2, 1}, {1, 0.5}, {1, 2}};
 
-      // Tabulation parameters
-      const int nyb = 100;
-      const double ybmin = -3;
-      const double ybmax = 10;
-      const double ybstp = ( ybmax - ybmin ) / nyb;
-      const std::vector<double> muv{5, 10, 50, 100};
-      double StrFct[14];
+    // Tabulation parameters
+    const int nyb = 100;
+    const double ybmin = -3;
+    const double ybmax = 10;
+    const double ybstp = ( ybmax - ybmin ) / nyb;
+    const std::vector<double> muv{5, 10, 50, 100};
+    double StrFct[14];
   
-      std::vector<std::vector<double>> f2h;
-      std::vector<std::vector<double>> f2a;
-      for (int i = 0; i < (int) xmuv.size(); i++)
-	{
-	  const double xmuR = xmuv[i][0];
-	  const double xmuF = xmuv[i][1];
-	  std::cout << "#xmuR = " << xmuR << ", xmuF = " << xmuF << std::endl;
+    std::vector<std::vector<double>> f2h;
+    std::vector<std::vector<double>> f2a;
+    for (int i = 0; i < (int) xmuv.size(); i++){
+	    const double xmuR = xmuv[i][0];
+	    const double xmuF = xmuv[i][1];
+	    std::cout << "#xmuR = " << xmuR << ", xmuF = " << xmuF << std::endl;
 
-	  // Structure functions
-	  hoppetStartStrFctExtended(order_max, nflav, sc_choice, zmass, param_coefs, wmass, zmass);
-	  hoppetInitStrFct(order_max, param_coefs, xmuR, xmuF);
-	  const auto F2 = BuildStructureFunctions(F2Obj, PDFs, order_max - 1, as, fBq, xmuR, xmuF);
+      // Structure functions
+	    hoppetStartStrFctExtended(order_max, nflav, sc_choice, zmass, param_coefs, wmass, zmass);
+	    hoppetInitStrFct(order_max, param_coefs, xmuR, xmuF);
+	    const auto F2 = BuildStructureFunctions(F2Obj, PDFs, order_max - 1, as, fBq, xmuR, xmuF);
 
-	  std::vector<double> hop;
-	  std::vector<double> apf;
-	  for (double Q : muv)
-	    {
-	      const double PZ = pow(Q, 2) / ( pow(Q, 2) + pow(zmass, 2) ) / ( 4 * s2tw * ( 1 - s2tw ) );
-	      for (double y = ybmin; y <= 1.0000001 * ybmax; y += ybstp)
-		{
-		  const double x = 1 / ( 1 + exp(y) );
-		  hoppetStrFct(x, Q, xmuR * Q, xmuF * Q, StrFct);
-		  hop.push_back(StrFct[iF2EM] + StrFct[iF2Z] * ( Ve * Ve + Ae * Ae ) * pow(PZ, 2) - StrFct[iF2gZ] * Ve * PZ);
-		  apf.push_back(F2.at(0).Evaluate(Q).Evaluate(x));
-		}
+      std::vector<double> hop;
+	    std::vector<double> apf;
+	    for (double Q : muv){
+  	    const double PZ = pow(Q, 2) / ( pow(Q, 2) + pow(zmass, 2) ) / ( 4 * s2tw * ( 1 - s2tw ) );
+	      for (double y = ybmin; y <= 1.0000001 * ybmax; y += ybstp){
+    		  const double x = 1 / ( 1 + exp(y) );
+		      hoppetStrFct(x, Q, xmuR * Q, xmuF * Q, StrFct);
+		      hop.push_back(StrFct[iF2EM] + StrFct[iF2Z] * ( Ve * Ve + Ae * Ae ) * pow(PZ, 2) - StrFct[iF2gZ] * Ve * PZ);
+		      apf.push_back(F2.at(0).Evaluate(Q).Evaluate(x));
+		      }
 	    }
-	  f2h.push_back(hop);
-	  f2a.push_back(apf);
-	}
+	    f2h.push_back(hop);
+	    f2a.push_back(apf);
+	  }
 
-      std::ofstream fout("../plots/F2NC_Scale_Variations_N" + std::to_string(order_max - 1) + "LO.dat");
-      fout << std::scientific;
+    std::ofstream fout("F2NC_Scale_Variations_N" + std::to_string(order_max - 1) + "LO.dat");
+    fout << std::scientific;
   
-      fout << "#x\t\tQ [GeV]\t\tF2[HOPPET]\tF2[APFEL]" << std::endl;
-      int i = 0;
-      for (double Q : muv)
-	{
-	  for (double y = ybmin; y <= 1.0000001 * ybmax; y += ybstp)
-	    {
-	      const double x = 1 / ( 1 + exp(y) );
+    fout << "#x\t\tQ [GeV]\t\tF2[HOPPET]\tF2[APFEL]\t(xmuR,xmuF) = (1, 1), (0.5, 1), (2, 1), (1, 0.5), (1, 2)" << std::endl;
+    int i = 0;
+    for (double Q : muv){
+     for (double y = ybmin; y <= 1.0000001 * ybmax; y += ybstp){
+  	    const double x = 1 / ( 1 + exp(y) );
 	      fout << x << "\t" << Q << "\t";
 	      for (int j = 0; j < (int) f2h.size(); j++)
-		fout << f2h[j][i] << "\t" << f2a[j][i] << "\t";
+		    fout << f2h[j][i] << "\t" << f2a[j][i] << "\t";
 	      fout << std::endl;
 	      i++;
 	    }
-	  fout << "\n";
-	}
-      fout.close();
-    }
+     fout << "\n";
+	  }
+    fout.close();
+  }
 }

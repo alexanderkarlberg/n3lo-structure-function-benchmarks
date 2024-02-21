@@ -192,7 +192,7 @@ int main()
     }
 
   // Create latex table
-  FILE* pFile = fopen(("results/table_N" + std::to_string(order_max - 1) + "LO.tex").c_str(), "w");
+  FILE* pFile = fopen(("table_N" + std::to_string(order_max - 1) + "LO.tex").c_str(), "w");
   for (double Q : std::vector<double>{2, 50, 100})
     {
       const double PZ  = pow(Q, 2) / ( pow(Q, 2) + pow(zmass, 2) ) / ( 4 * s2tw * ( 1 - s2tw ) );
@@ -233,7 +233,7 @@ int main()
   const double ybstp = ( ybmax - ybmin ) / nyb;
   const std::vector<double> muv{2, 5, 10, 50, 100, 500};
 
-  std::ofstream fout("../plots/StructureFunctions_N" + std::to_string(order_max - 1) + "LO.dat");
+  std::ofstream fout("StructureFunctions_N" + std::to_string(order_max - 1) + "LO.dat");
   fout << std::scientific;
   for (double Q : muv)
     {
@@ -259,6 +259,14 @@ int main()
 	   << "F3Wp [APFEL]\t"
 	   << "F3Wm [HOPPET]\t"
 	   << "F3Wm [APFEL]\t"
+	   << "σNCe+ [HOPPET]\t"
+	   << "σNCe+ [APFEL]\t"
+	   << "σNCe- [HOPPET]\t"
+	   << "σNCe- [APFEL]\t"
+	   << "σCCe+ [HOPPET]\t"
+	   << "σCCe+ [APFEL]\t"
+	   << "σCCe- [HOPPET]\t"
+	   << "σCCe- [APFEL]\t"
 	   << "\n";
       for (double y = ybmin; y <= 1.0000001 * ybmax; y += ybstp)
 	{
