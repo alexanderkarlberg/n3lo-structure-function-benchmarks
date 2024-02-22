@@ -16,7 +16,7 @@ To compile the benchmarks simply type
 
     make [-j]
 
-There are three executables that can be run. The all use as the PDF initial condition section 1.3 of http://arxiv.org/abs/hep-ph/0204316. Typing
+There are three executables that can be run. They all use the same PDF initial condition of section 1.3 in http://arxiv.org/abs/hep-ph/0204316. Typing
 
     ./TabulateStructureFunctions
 
@@ -28,7 +28,7 @@ To reproduce the tables from arXiv:24XX.XXXXX one can run
 
 This will produce two files in addition to a print on the screen that should show that the ratio between the output of the two evolution codes is 1. `table_N3LO.tex` contains the tables that are printed in the paper. `StructureFunctions_N3LO.dat` contains all the structure functions and reduced cross sections at N3LO for a number of Q-values and finely spaced in x.
 
-Finely one can run 
+Finally one can run 
 
     ./ScaleVariations
 
