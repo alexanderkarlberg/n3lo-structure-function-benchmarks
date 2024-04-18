@@ -192,7 +192,9 @@ int main()
     }
 
   // Create latex table
-  FILE* pFile = fopen(("table_N" + std::to_string(order_max - 1) + "LO.tex").c_str(), "w");
+  for(int order = order_max; order>0; order--){
+    hoppetInitStrFct(order,param_coefs,xmuR,xmuF);
+    FILE* pFile = fopen(("table_N" + std::to_string(order - 1) + "LO.tex").c_str(), "w");
   for (double Q : std::vector<double>{2, 50, 100})
     {
       const double PZ  = pow(Q, 2) / ( pow(Q, 2) + pow(zmass, 2) ) / ( 4 * s2tw * ( 1 - s2tw ) );
@@ -221,11 +223,12 @@ int main()
       fprintf(pFile, "\\hline\n");
       fprintf(pFile, "\\end{tabular}\n");
       fprintf(pFile, "\\end{adjustbox}");
-      fprintf(pFile, "%s", ("\\caption{N$^{" + std::to_string(order_max - 1) + "}$LO stucture functions with N$^{" + std::to_string(nloop - 1) + "}$LO evolution at $Q = " + std::to_string((int) Q) + "$ GeV.}\n").c_str());
+      fprintf(pFile, "%s", ("\\caption{N$^{" + std::to_string(order - 1) + "}$LO stucture functions with N$^{" + std::to_string(nloop - 1) + "}$LO evolution at $Q = " + std::to_string((int) Q) + "$ GeV, and $n_f=5$ light flavours.}\n").c_str());
+      fprintf(pFile, "%s", ("\\label{tab:N" + std::to_string(order - 1) + "LO-Q" + std::to_string((int) Q) + "}\n").c_str());
       fprintf(pFile, "\\end{table}\n\n\n");
     }
   fclose(pFile);
-
+  }
   // Number for the plots
   const int nyb = 500;
   const double ybmin = -3;
