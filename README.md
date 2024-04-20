@@ -25,13 +25,13 @@ This will produce three executables. They all use the same PDF initial condition
 
 In the [`code`](code/) folder, running the code:
 
-    ./TabulateStructureFunctions
+    ./StructureFunctionsJoint
 
 will print on the screen comparison tables between `apfel++` and `Hoppet` for different values of $x_{\rm B}$ and $Q$ and for all perturbative orders from LO to N<sup>3</sup>LO. On top of the structure functions, the tables also show a few PDF combinations. Results on screen are presented as |`apfel++` / `Hoppet` - 1|. This code will also dump into the [`plots`](plots/) folder the files: `StructureFunctions_N0LO.dat`, `StructureFunctions_N1LO.dat`, `StructureFunctions_N2LO.dat`, and `StructureFunctions_N3LO.dat` that can be used to produce a number of plots (see below). Moreover, also the files: `table_N0LO_APFEL.tex`, `table_N1LO_APFEL.tex`, `table_N2LO_APFEL.tex`, `table_N3LO_APFEL.tex`, `table_N0LO_HOPPET.tex`, `table_N1LO_HOPPET.tex`, `table_N2LO_HOPPET.tex`, and `table_N3LO_HOPPET.tex` will be created in the [`tables`](\tables) folder.
 
 Similarly to the code above, running the code:
 
-    ./StructureFunctionsJoint
+    ./TabulateStructureFunctions
 
 will print on screen comparison tables for both `apfel++` and `Hoppet` this time showing the values of structure functions and, again, few PDF combinations.
 
@@ -55,3 +55,10 @@ The [`plots`](plots/) folder, where some of the codes described above dump part 
 and are responsible for all the plots contained in the [`plots`](plots/) folder.
 
 # Tables
+
+The [`tables`](tables/) folder contains the benchmark tables presented in the paper in `LaTeX` format. The file `tables.tex` collects the table file produced by the `StructureFunctionsJoint` code and can be compiled with `LaTeX` to produce [this](tables/tables.pdf) file.
+
+# Contacts
+
+- Valerio Bertone: valerio.bertone@cern.ch
+- Alexander Karlberg: alexander.karlberg@cern.ch
