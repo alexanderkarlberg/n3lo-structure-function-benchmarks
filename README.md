@@ -52,7 +52,7 @@ The [`plots`](plots/) folder, where some of the codes described above dump part 
 * `StructureFunctions_N2LO.py`
 * `StructureFunctions_N3LO.py`
 
-and are responsible for all the plots contained in the [`plots`](plots/) folder.
+and are responsible for all plots contained in the [`plots`](plots/) folder.
 
 # Tables
 
