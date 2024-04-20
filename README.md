@@ -33,13 +33,13 @@ Similarly to the code above, running the code:
 
     ./TabulateStructureFunctions
 
-will print on screen comparison tables for both `apfel++` and `Hoppet` this time showing the values of structure functions and, again, few PDF combinations.
+will print on screen comparison tables for both `apfel++` and `Hoppet`, this time showing the values of structure functions and, again, a few PDF combinations.
 
 Finally, running the code: 
 
     ./ScaleVariations
 
-will produce files in the (`plots`)[plots/] folder with the structure function $F_2^{\rm NC}$ evaluated at multiple values of the renormalisation and factorisation scales $\mu_{\rm R}$ and $\mu_{\rm F}$, respectively. The files produced are: `F2NC_Scale_Variations_N0LO.dat`, `F2NC_Scale_Variations_N1LO.dat`, `F2NC_Scale_Variations_N2LO.dat`, and `F2NC_Scale_Variations_N3LO.dat` and can be used to produce plots.
+will produce files in the [`plots`](plots/) folder for the structure function $F_2^{\rm NC}$ evaluated at multiple values of the renormalisation and factorisation scales $\mu_{\rm R}$ and $\mu_{\rm F}$. The files produced are: `F2NC_Scale_Variations_N0LO.dat`, `F2NC_Scale_Variations_N1LO.dat`, `F2NC_Scale_Variations_N2LO.dat`, and `F2NC_Scale_Variations_N3LO.dat` and can be used to produce plots.
 
 # Producing the plots
 
@@ -52,11 +52,11 @@ The [`plots`](plots/) folder, where some of the codes described above dump part 
 * `StructureFunctions_N2LO.py`
 * `StructureFunctions_N3LO.py`
 
-and are responsible for all plots contained in the [`plots`](plots/) folder.
+and are responsible for the production of all of the plots contained in the [`plots`](plots/) folder.
 
 # Tables
 
-The [`tables`](tables/) folder contains the benchmark tables presented in the paper in `LaTeX` format. The file `tables.tex` collects the table file produced by the `StructureFunctionsJoint` code and can be compiled with `LaTeX` to produce [this](tables/tables.pdf) file.
+The [`tables`](tables/) folder contains the benchmark tables presented in the paper in `LaTeX` format. The file `tables.tex` collects the table files produced by the `StructureFunctionsJoint` code and can be compiled with `LaTeX` producing [this](tables/tables.pdf) file.
 
 # Contacts
 
