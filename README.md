@@ -1,35 +1,57 @@
 # n3lo-structure-function-benchmarks
 
-This repository contains the C++ files that were used to generate all the benchmark results in
+This repository contains the C++ codes used to benchmark the inclusive deep-inelastic-scattering (DIS) structure functions at $\mathcal{O}(\alpha_S^3)$, _i.e._ N<sup>3</sup>LO, as implemented in `apfel++` and `Hoppet` and presented in:
 
-* Valerio Bertone and Alexander Karlberg: arXiv:24XX.XXXXX
+* V. Bertone and A. Karlberg, _Benchmark of deep-inelastic-scattering structure functions at_ $\mathcal{O}(\alpha_S^3)$, arXiv:24XX.XXXXX,
 
-In particular the files benchmark the deep inelastic scattering structure functions at $\mathcal{O}(\alpha_S^3)$ as implemented in <span style="font-variant:small-caps;">apfel</span>++ and <span style="font-variant:small-caps;">Hoppet</span>.
+along with the suite of `Matplotlib` scripts used to produce the plots shown in that paper and many others.
 
-In order to compile the code both programs must be installed
+In order to compile the code, both `apfel++` and `Hoppet` must be installed. See:
 
-* <span style="font-variant:small-caps;">apfel</span>++ (https://github.com/vbertone/apfelxx)
-* <span style="font-variant:small-caps;">Hoppet</span> (https://github.com/hoppet-code/hoppet)
+* [`apfel++`](https://github.com/vbertone/apfelxx),
+* [`Hoppet`](https://github.com/hoppet-code/hoppet),
+
+for the respective installation instructions.
 
 # Installation
-To compile the benchmarks simply type
+
+To compile the benchmark codes, simply go into the [`code`](code/) folder and type:
 
     make [-j]
 
-There are three executables that can be run. They all use the same PDF initial condition of section 1.3 in http://arxiv.org/abs/hep-ph/0204316. Typing
+This will produce three executables. They all use the same PDF initial condition of section 1.3 in http://arxiv.org/abs/hep-ph/0204316.
+
+# Execution
+
+In the [`code`](code/) folder, running the code:
 
     ./TabulateStructureFunctions
 
-will print a comparison of <span style="font-variant:small-caps;">apfel</span>++ and <span style="font-variant:small-caps;">Hoppet</span> on the screen for Q =  91.1876 GeV. The benchmark shows a few PDF combinations along with structure functions at N3LO.
+will print on the screen comparison tables between `apfel++` and `Hoppet` for different values of $x_{\rm B}$ and $Q$ and for all perturbative orders from LO to N<sup>3</sup>LO. On top of the structure functions, the tables also show a few PDF combinations. Results on screen are presented as |`apfel++` / `Hoppet` - 1|. This code will also dump into the [`plots`](plots/) folder the files: `StructureFunctions_N0LO.dat`, `StructureFunctions_N1LO.dat`, `StructureFunctions_N2LO.dat`, and `StructureFunctions_N3LO.dat` that can be used to produce a number of plots (see below). Moreover, also the files: `table_N0LO_APFEL.tex`, `table_N1LO_APFEL.tex`, `table_N2LO_APFEL.tex`, `table_N3LO_APFEL.tex`, `table_N0LO_HOPPET.tex`, `table_N1LO_HOPPET.tex`, `table_N2LO_HOPPET.tex`, and `table_N3LO_HOPPET.tex` will be created in the [`tables`](\tables) folder.
 
-To reproduce the tables from arXiv:24XX.XXXXX one can run
+Similarly to the code above, running the code:
 
     ./StructureFunctionsJoint
 
-This will produce two files in addition to a print on the screen that should show that the ratio between the output of the two evolution codes is 1. `table_N3LO.tex` contains the tables that are printed in the paper. `StructureFunctions_N3LO.dat` contains all the structure functions and reduced cross sections at N3LO for a number of Q-values and finely spaced in x.
+will print on screen comparison tables for both `apfel++` and `Hoppet` this time showing the values of structure functions and, again, few PDF combinations.
 
-Finally one can run 
+Finally, running the code: 
 
     ./ScaleVariations
 
-This will produce a file with the structure functions evaluated at multiple values of the renormalisation and factorisation scale. The output can be found in `F2NC_Scale_Variations_N1LO.dat`, `F2NC_Scale_Variations_N2LO.dat`, and `F2NC_Scale_Variations_N3LO.dat`.
+will produce files in the (`plots`)[plots/] folder with the structure function $F_2^{\rm NC}$ evaluated at multiple values of the renormalisation and factorisation scales $\mu_{\rm R}$ and $\mu_{\rm F}$, respectively. The files produced are: `F2NC_Scale_Variations_N0LO.dat`, `F2NC_Scale_Variations_N1LO.dat`, `F2NC_Scale_Variations_N2LO.dat`, and `F2NC_Scale_Variations_N3LO.dat` and can be used to produce plots.
+
+# Producing the plots
+
+The [`plots`](plots/) folder, where some of the codes described above dump part of their output, also contains some `python` scripts that utilise `matplotlib` to produce plots in `.pdf` format. The scripts are:
+
+* `PerturbativeConvergence.py`
+* `ScaleVariations.py`
+* `StructureFunctions_N0LO.py`
+* `StructureFunctions_N1LO.py`
+* `StructureFunctions_N2LO.py`
+* `StructureFunctions_N3LO.py`
+
+and are responsible for all the plots contained in the [`plots`](plots/) folder.
+
+# Tables
