@@ -1,0 +1,9 @@
+ScaleVariations
+ScaleVariations.o
+StructureFunctionsJoint
+StructureFunctionsJoint.o
+TabulateStructureFunctions
+TabulateStructureFunctions.o
+__pycache__
+tables.aux
+tables.log
