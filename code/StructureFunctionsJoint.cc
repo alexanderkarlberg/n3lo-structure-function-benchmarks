@@ -364,14 +364,14 @@ int main()
 	  fprintf(pFileh, "\\hline\n");
 	  fprintf(pFileh, "\\end{tabular}\n");
 	  fprintf(pFileh, "\\end{adjustbox}");
-	  fprintf(pFileh, "%s", ("\\caption{" + vorder_str[order_max - 1] + " stucture functions with " + vorder_str[nloop - 1] + " evolution at $Q = " + std::to_string((int) Q) + "$ GeV, and $n_f=5$ light flavours.}\n").c_str());
+	  fprintf(pFileh, "%s", ("\\caption{" + vorder_str[order_max - 1] + " stucture functions with " + vorder_str[nloop - 1] + " evolution at $Q = " + std::to_string((int) Q) + "$ GeV.}\n").c_str());
 	  fprintf(pFileh, "%s", ("\\label{tab:N" + std::to_string(order_max - 1) + "LO-Q" + std::to_string((int) Q) + "}\n").c_str());
 	  fprintf(pFileh, "\\end{table}\n\n\n");
 
 	  fprintf(pFilea, "\\hline\n");
 	  fprintf(pFilea, "\\end{tabular}\n");
 	  fprintf(pFilea, "\\end{adjustbox}");
-	  fprintf(pFilea, "%s", ("\\caption{" + vorder_str[order_max - 1] + " stucture functions with " + vorder_str[nloop - 1] + " evolution at $Q = " + std::to_string((int) Q) + "$ GeV, and $n_f=5$ light flavours.}\n").c_str());
+	  fprintf(pFilea, "%s", ("\\caption{" + vorder_str[order_max - 1] + " stucture functions with " + vorder_str[nloop - 1] + " evolution at $Q = " + std::to_string((int) Q) + "$ GeV.}\n").c_str());
 	  fprintf(pFilea, "%s", ("\\label{tab:N" + std::to_string(order_max - 1) + "LO-Q" + std::to_string((int) Q) + "}\n").c_str());
 	  fprintf(pFilea, "\\end{table}\n\n\n");
 	}
