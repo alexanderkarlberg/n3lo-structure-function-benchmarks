@@ -11,6 +11,8 @@
 !     exact expressions are at a relative 10^-4 starting from 1-y =
 !     10^-7.
 !
+!     The expressions take as input Y=y and DL=log(y).
+!
 !     Please cite V. Bertone, A. Karlberg, arXiv:2404:XXXXX if using the
 !     code.
 
