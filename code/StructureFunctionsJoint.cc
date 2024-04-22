@@ -128,11 +128,11 @@ int main()
       // APFEL++
       apfel::Banner();
       apfel::AlphaQCD a{asQ, Q0, Thresholds, nloop - 1};
-      const apfel::TabulateObject<double> Alphas{a, 1000, 0.9, 1001, 3};
+      const apfel::TabulateObject<double> Alphas{a, 1000, 0.9, 111, 3};
       const auto as = [&] (double const& mu) -> double{ return Alphas.Evaluate(mu); };
       const apfel::Grid g{{apfel::SubGrid{200, 1e-6, 5}, apfel::SubGrid{250, 1e-2, 5}, apfel::SubGrid{200, 6e-1, 5}, apfel::SubGrid{100, 8.5e-1, 5}}};
       const auto EvolvedPDFs = BuildDglap(InitializeDglapObjectsQCD(g, Thresholds), apfel::LHToyPDFs, Q0, nloop - 1, as);
-      const apfel::TabulateObject<apfel::Set<apfel::Distribution>> TabulatedPDFs{*EvolvedPDFs, 1000, 1, 800, 3};
+      const apfel::TabulateObject<apfel::Set<apfel::Distribution>> TabulatedPDFs{*EvolvedPDFs, 1000, 1, 110, 3};
       const auto PDFs = [&] (double const& x, double const& Q) -> std::map<int, double> { return TabulatedPDFs.EvaluateMapxQ(x, Q); };
       const std::function<std::vector<double>(double const&)> fBq = [=] (double const& Q) -> std::vector<double> { return EWCharges(Q); };
       const std::function<std::vector<double>(double const&)> fDq = [=] (double const& Q) -> std::vector<double> { return PVEWCharges(Q); };
@@ -144,9 +144,9 @@ int main()
       const auto F3 = BuildStructureFunctions(InitializeF3NCObjectsZM(g, Thresholds), PDFs, order_max - 1, as, fDq, xmuR, xmuF);
 
       // Tabulate
-      const apfel::TabulateObject<apfel::Distribution> F2total{[&] (double const& Q) -> apfel::Distribution{ return F2.at(0).Evaluate(Q); }, 500, 1, 600, 3, Thresholds};
-      const apfel::TabulateObject<apfel::Distribution> FLtotal{[&] (double const& Q) -> apfel::Distribution{ return FL.at(0).Evaluate(Q); }, 500, 1, 600, 3, Thresholds};
-      const apfel::TabulateObject<apfel::Distribution> F3total{[&] (double const& Q) -> apfel::Distribution{ return F3.at(0).Evaluate(Q); }, 500, 1, 600, 3, Thresholds};
+      const apfel::TabulateObject<apfel::Distribution> F2total{[&] (double const& Q) -> apfel::Distribution{ return F2.at(0).Evaluate(Q); }, 500, 1, 101, 3, Thresholds};
+      const apfel::TabulateObject<apfel::Distribution> FLtotal{[&] (double const& Q) -> apfel::Distribution{ return FL.at(0).Evaluate(Q); }, 500, 1, 101, 3, Thresholds};
+      const apfel::TabulateObject<apfel::Distribution> F3total{[&] (double const& Q) -> apfel::Distribution{ return F3.at(0).Evaluate(Q); }, 500, 1, 101, 3, Thresholds};
 
       // Charged current structure functions
       const auto F2p = BuildStructureFunctions(InitializeF2CCPlusObjectsZM(g, Thresholds),  PDFs, order_max - 1, as, fCKM, xmuR, xmuF);
@@ -157,12 +157,12 @@ int main()
       const auto F3m = BuildStructureFunctions(InitializeF3CCMinusObjectsZM(g, Thresholds), PDFs, order_max - 1, as, fCKM, xmuR, xmuF);
 
       // Tabulate
-      const apfel::TabulateObject<apfel::Distribution> F2totalp{[&] (double const& Q) -> apfel::Distribution { return F2p.at(0).Evaluate(Q) + F2m.at(0).Evaluate(Q); }, 500, 1, 600, 3, Thresholds};
-      const apfel::TabulateObject<apfel::Distribution> F2totalm{[&] (double const& Q) -> apfel::Distribution { return F2p.at(0).Evaluate(Q) - F2m.at(0).Evaluate(Q); }, 500, 1, 600, 3, Thresholds};
-      const apfel::TabulateObject<apfel::Distribution> FLtotalp{[&] (double const& Q) -> apfel::Distribution { return FLp.at(0).Evaluate(Q) + FLm.at(0).Evaluate(Q); }, 500, 1, 600, 3, Thresholds};
-      const apfel::TabulateObject<apfel::Distribution> FLtotalm{[&] (double const& Q) -> apfel::Distribution { return FLp.at(0).Evaluate(Q) - FLm.at(0).Evaluate(Q); }, 500, 1, 600, 3, Thresholds};
-      const apfel::TabulateObject<apfel::Distribution> F3totalp{[&] (double const& Q) -> apfel::Distribution { return F3m.at(0).Evaluate(Q) + F3p.at(0).Evaluate(Q); }, 500, 1, 600, 3, Thresholds};
-      const apfel::TabulateObject<apfel::Distribution> F3totalm{[&] (double const& Q) -> apfel::Distribution { return F3m.at(0).Evaluate(Q) - F3p.at(0).Evaluate(Q); }, 500, 1, 600, 3, Thresholds};
+      const apfel::TabulateObject<apfel::Distribution> F2totalp{[&] (double const& Q) -> apfel::Distribution { return F2p.at(0).Evaluate(Q) + F2m.at(0).Evaluate(Q); }, 500, 1, 101, 3, Thresholds};
+      const apfel::TabulateObject<apfel::Distribution> F2totalm{[&] (double const& Q) -> apfel::Distribution { return F2p.at(0).Evaluate(Q) - F2m.at(0).Evaluate(Q); }, 500, 1, 101, 3, Thresholds};
+      const apfel::TabulateObject<apfel::Distribution> FLtotalp{[&] (double const& Q) -> apfel::Distribution { return FLp.at(0).Evaluate(Q) + FLm.at(0).Evaluate(Q); }, 500, 1, 101, 3, Thresholds};
+      const apfel::TabulateObject<apfel::Distribution> FLtotalm{[&] (double const& Q) -> apfel::Distribution { return FLp.at(0).Evaluate(Q) - FLm.at(0).Evaluate(Q); }, 500, 1, 101, 3, Thresholds};
+      const apfel::TabulateObject<apfel::Distribution> F3totalp{[&] (double const& Q) -> apfel::Distribution { return F3m.at(0).Evaluate(Q) + F3p.at(0).Evaluate(Q); }, 500, 1, 101, 3, Thresholds};
+      const apfel::TabulateObject<apfel::Distribution> F3totalm{[&] (double const& Q) -> apfel::Distribution { return F3m.at(0).Evaluate(Q) - F3p.at(0).Evaluate(Q); }, 500, 1, 101, 3, Thresholds};
 
       // Number for the plots
       const int nyb = 500;
