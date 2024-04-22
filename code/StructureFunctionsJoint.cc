@@ -276,10 +276,10 @@ int main()
 		   << F2CCmh << "\t" << F2CCma << "\t"
 		   << F3CCph << "\t" << F3CCpa << "\t"
 		   << F3CCmh << "\t" << F3CCma << "\t"
-		   << (ye > 1 ? std::nan(0) : RedXSecNCph) << "\t" << (ye > 1 ? std::nan(0) : RedXSecNCpa) << "\t"
-		   << (ye > 1 ? std::nan(0) : RedXSecNCmh) << "\t" << (ye > 1 ? std::nan(0) : RedXSecNCma) << "\t"
-		   << (ye > 1 ? std::nan(0) : RedXSecCCph) << "\t" << (ye > 1 ? std::nan(0) : RedXSecCCpa) << "\t"
-		   << (ye > 1 ? std::nan(0) : RedXSecCCmh) << "\t" << (ye > 1 ? std::nan(0) : RedXSecCCma)
+		   << (ye > 1 ? std::nan("0") : RedXSecNCph) << "\t" << (ye > 1 ? std::nan("0") : RedXSecNCpa) << "\t"
+		   << (ye > 1 ? std::nan("0") : RedXSecNCmh) << "\t" << (ye > 1 ? std::nan("0") : RedXSecNCma) << "\t"
+		   << (ye > 1 ? std::nan("0") : RedXSecCCph) << "\t" << (ye > 1 ? std::nan("0") : RedXSecCCpa) << "\t"
+		   << (ye > 1 ? std::nan("0") : RedXSecCCmh) << "\t" << (ye > 1 ? std::nan("0") : RedXSecCCma)
 		   << std::endl;
 	    }
 	  fout << "\n";
