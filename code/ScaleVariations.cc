@@ -13,8 +13,9 @@ using namespace hoppetv1;
 // definition of the initial condition function
 void  lha_unpolarized_dummy_pdf(const double & x, const double & Q, double * pdf)
 {
-  for (auto const& f : apfel::QCDEvToPhys(apfel::LHToyPDFs(x, Q)))
-    pdf[f.first + 6] = f.second;
+  const std::map<int, double> fmap = apfel::QCDEvToPhys(apfel::LHToyPDFs(x, Q));
+  for (int i = -6; i <= 6; i++)
+    pdf[i+6] = fmap.at(i);
 }
 
 //_________________________________________________________________________
