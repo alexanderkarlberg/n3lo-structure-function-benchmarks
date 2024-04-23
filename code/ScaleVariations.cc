@@ -98,11 +98,11 @@ int main()
 
       // APFEL++
       apfel::AlphaQCD a{asQ, Q0, Thresholds, nloop - 1};
-      const apfel::TabulateObject<double> Alphas{a, 1000, 0.9, 111, 3};
+      const apfel::TabulateObject<double> Alphas{a, 1000, 0.9, 211, 3};
       const auto as = [&] (double const& mu) -> double{ return Alphas.Evaluate(mu); };
       const apfel::Grid g{{apfel::SubGrid{200, 1e-6, 3}, apfel::SubGrid{250, 1e-2, 3}, apfel::SubGrid{200, 6e-1, 3}, apfel::SubGrid{100, 8.5e-1, 3}}};
       const auto EvolvedPDFs = BuildDglap(InitializeDglapObjectsQCD(g, Thresholds), apfel::LHToyPDFs, Q0, nloop - 1, as);
-      const apfel::TabulateObject<apfel::Set<apfel::Distribution>> TabulatedPDFs{*EvolvedPDFs, 500, 1, 110, 3};
+      const apfel::TabulateObject<apfel::Set<apfel::Distribution>> TabulatedPDFs{*EvolvedPDFs, 500, 1, 210, 3};
       const auto PDFs = [&] (double const& x, double const& Q) -> std::map<int, double> { return TabulatedPDFs.EvaluateMapxQ(x, Q); };
       const std::function<std::vector<double>(double const&)> fBq = [=] (double const& Q) -> std::vector<double> { return EWCharges(Q); };
       const auto F2Obj = InitializeF2NCObjectsZM(g, Thresholds);
@@ -151,7 +151,6 @@ int main()
 	  f2h.push_back(hop);
 	  f2a.push_back(apf);
 	}
-
       std::ofstream fout("../plots/F2NC_Scale_Variations_N" + std::to_string(order_max - 1) + "LO.dat");
       fout << std::scientific;
   
