@@ -11,7 +11,8 @@
 !     exact expressions are at a relative 10^-4 starting from 1-y =
 !     10^-7.
 !
-!     The expressions take as input Y=y and DL=log(y).
+!     The expressions take as input Y=y and DL=log(y). The numeircal 
+!     coefficients are exact, and are evaluated for CA=3, CF=4/3, and Tr=1/2. 
 !
 !     Please cite V. Bertone, A. Karlberg, arXiv:2404:XXXXX if using the
 !     code.
@@ -73,7 +74,8 @@
       END FUNCTION
 
 !     For Y values close to 1, use the series expansion close 
-!     to 1-Y=0 instead of full value, for numerical convergence
+!     to 1-Y=0 instead of full value, for numerical convergence, and 
+!     without loss of precision.
 !     
       FUNCTION DL1VAL (Y, DL)
       IMPLICIT NONE
