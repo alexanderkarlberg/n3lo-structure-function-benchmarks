@@ -2,7 +2,7 @@
 
 This repository contains the C++ codes used to benchmark the inclusive deep-inelastic-scattering (DIS) structure functions at $\mathcal{O}(\alpha_S^3)$, _i.e._ N<sup>3</sup>LO, as implemented in `apfel++` and `Hoppet`. The benchmark is presented in:
 
-* V. Bertone and A. Karlberg, _Benchmark of deep-inelastic-scattering structure functions at_ $\mathcal{O}(\alpha_S^3)$, arXiv:24XX.XXXXX,
+* V. Bertone and A. Karlberg, _Benchmark of deep-inelastic-scattering structure functions at_ $\mathcal{O}(\alpha_S^3)$, [arXiv:2404.15711](https://arxiv.org/abs/2404.15711),
 
 along with the suite of `Matplotlib` scripts used to produce the plots shown in that paper and many others.
 
